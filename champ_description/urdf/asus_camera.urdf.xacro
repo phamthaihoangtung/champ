@@ -86,7 +86,7 @@
       </xacro:asus_camera_model>
   
       <!-- ASUS Xtion PRO camera for simulation -->
-      <gazebo reference="${name}_depth_frame">
+      <!-- <gazebo reference="${name}_depth_frame">
         <sensor type="depth" name="${name}">
           <update_rate>20</update_rate>
           <camera name="${name}_depth_frame_camera">
@@ -102,16 +102,13 @@
             </clip>
           </camera>
 
-          <!-- Set always_on only sensor, not on plugin -->
           <always_on>1</always_on>
 
-          <!-- Set update_rate only sensor, not on plugin -->
           <update_rate>30</update_rate>
 
           
           <plugin name="${name}_camera_controller" filename="libgazebo_ros_camera.so">
             <ros>
-              <!-- <namespace>custom_ns</namespace> -->
               <argument>custom_camera/image_raw:=${name}/rgb/image_raw</argument>
               <argument>custom_camera/image_depth:=${name}/depth/image_raw</argument>
               <argument>custom_camera/camera_info:=custom_camera/custom_info_raw</argument>
@@ -127,10 +124,10 @@
                       <reliability>reliable</reliability>
                       <durability>volatile</durability>
                       <history>keep_all</history>
-                      <deadline>123</deadline> <!-- milliseconds -->
-                      <lifespan>42</lifespan> <!-- milliseconds -->
+                      <deadline>123</deadline> 
+                      <lifespan>42</lifespan> 
                       <liveliness>manual_by_topic</liveliness>
-                      <liveliness_lease_duration>1000</liveliness_lease_duration> <!-- milliseconds -->
+                      <liveliness_lease_duration>1000</liveliness_lease_duration> 
                   </publisher>
                   <subscription>
 
@@ -161,10 +158,10 @@
                       <reliability>reliable</reliability>
                       <durability>volatile</durability>
                       <history>keep_all</history>
-                      <deadline>123</deadline> <!-- milliseconds -->
-                      <lifespan>42</lifespan> <!-- milliseconds -->
+                      <deadline>123</deadline> 
+                      <lifespan>42</lifespan> 
                       <liveliness>manual_by_topic</liveliness>
-                      <liveliness_lease_duration>1000</liveliness_lease_duration> <!-- milliseconds -->
+                      <liveliness_lease_duration>1000</liveliness_lease_duration> 
                   </publisher>
                   <subscription>
 
@@ -179,10 +176,10 @@
                       <reliability>reliable</reliability>
                       <durability>volatile</durability>
                       <history>keep_all</history>
-                      <deadline>123</deadline> <!-- milliseconds -->
-                      <lifespan>42</lifespan> <!-- milliseconds -->
+                      <deadline>123</deadline>
+                      <lifespan>42</lifespan>
                       <liveliness>manual_by_topic</liveliness>
-                      <liveliness_lease_duration>1000</liveliness_lease_duration> <!-- milliseconds -->
+                      <liveliness_lease_duration>1000</liveliness_lease_duration>
                   </publisher>
                   <subscription>
 
@@ -193,21 +190,59 @@
               </topic>
               
             </qos>
-            <!-- Set camera name. If empty, defaults to sensor name (i.e. "sensor_name") -->
-            <!-- <camera_name>custom_camera</camera_name> -->
 
-            <!-- Set TF frame name. If empty, defaults to link name (i.e. "link_name") -->
             <frame_name>${name}_depth_optical_frame</frame_name>
 
             <hack_baseline>0.07</hack_baseline>
 
-            <!-- No need to repeat distortion parameters or to set autoDistortion -->
 
             <min_depth>0.001</min_depth>
             <max_depth>20.0</max_depth>
           </plugin>
+                  
         </sensor>
-      </gazebo>
+      </gazebo> -->
+
+       <!-- Camera Sensor -->
+      <!-- <gazebo reference="${name}_depth_frame">
+        <sensor name="${name}_rgb_camera" type="camera">
+          <update_rate>30</update_rate>
+          <pose>0 0 0 0 0 0</pose>
+          <camera>
+            <horizontal_fov>1.096</horizontal_fov> 
+            <image>
+              <width>640</width>
+              <height>480</height>
+              <format>R8G8B8</format>
+            </image>
+            <clip>
+              <near>0.001</near>
+              <far>20.0</far>
+            </clip>
+          </camera>
+          <always_on>1</always_on>
+          <topic>${name}/rgb/image_raw</topic>
+        </sensor>
+
+        <sensor name="${name}_depth_camera" type="depth">
+          <update_rate>30</update_rate>
+          <pose>0 0 0 0 0 0</pose>
+          <depth_camera>
+            <horizontal_fov>1.096</horizontal_fov> 
+            <image>
+              <width>640</width>
+              <height>480</height>
+              <format>FLOAT32</format>
+            </image>
+            <clip>
+              <near>0.5</near>
+              <far>9.0</far>
+            </clip>
+          </depth_camera>
+          <always_on>1</always_on>
+          <topic>${name}/depth/image_raw</topic>
+        </sensor>
+      </gazebo> -->
     </xacro:macro>
   </robot>
   

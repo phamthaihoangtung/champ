@@ -901,15 +901,15 @@
       <gaussian_noise>0.01</gaussian_noise>
     </plugin>
   </gazebo>
-  <gazebo>
+  <!-- <gazebo>
     <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
       <parameters>/home/Alexander.Karavaev/champ_ws/install/champ_gazebo/share/champ_gazebo/config/ros_control.yaml</parameters>
     </plugin>
-  </gazebo>
-  <!-- <gazebo>
+  </gazebo> -->
+  <gazebo>
         <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
     
             <parameters>$(find champ_gazebo)/config/ros_control.yaml</parameters>
           </plugin>
-    </gazebo> -->
+    </gazebo>
 </robot>
