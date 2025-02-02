@@ -38,7 +38,7 @@
       </xacro:hokuyo_utm30lx_model>
 
       <gazebo reference="${name}_frame">
-        <sensor type="ray" name="${name}">
+        <!-- <sensor type="ray" name="${name}">
           <always_on>true</always_on>
           <update_rate>${update_rate}</update_rate>
           <pose>0 0 0 0 0 0</pose>
@@ -63,15 +63,52 @@
               <stddev>0.004</stddev>
             </noise>
           </ray>
-          <!-- <plugin name="gazebo_ros_${name}_controller" filename="libgazebo_ros_ray_sensor.so">
+          
+          <plugin name="gazebo_ros_${name}_controller" filename="libgazebo_ros_ray_sensor.so">
             <ros>
               <argument>~/out:=${ros_topic}</argument>
             </ros>
             <output_type>sensor_msgs/LaserScan</output_type>
       
             <min_intensity>100.0</min_intensity>
-          </plugin> -->
-        </sensor>
+          </plugin>
+        </sensor> -->
+
+      <sensor name="${name}" type="gpu_lidar">
+        <always_on>true</always_on>
+        <update_rate>${update_rate}</update_rate>
+        <pose>0 0 0 0 0 0</pose>
+        <visualize>false</visualize>
+        <topic>${ros_topic}</topic>
+        <lidar>
+          <horizontal>
+            <samples>${ray_count}</samples>
+            <resolution>1</resolution>
+            <min_angle>${min_angle * M_PI/180}</min_angle>
+            <max_angle>${max_angle * M_PI/180}</max_angle>
+          </horizontal>
+          <range>
+            <min>0.2</min>
+            <max>30.0</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.004</stddev>
+          </noise>
+        </lidar>
+
+        <!-- <plugin name="gz_ros_${name}_controller" filename="gz-sim-ros2-lidar-system">
+          <ros>
+            <remapping>~/out:=${ros_topic}</remapping>
+          </ros>
+          <output_type>sensor_msgs/LaserScan</output_type>
+          <min_intensity>100.0</min_intensity>
+        </plugin> -->
+
+      </sensor>
+
       </gazebo>
     </xacro:macro>
   
@@ -80,7 +117,7 @@
         <xacro:insert_block name="origin" />
       </xacro:hokuyo_utm30lx_model>
 
-      <gazebo reference="${name}_frame">
+      <!-- <gazebo reference="${name}_frame">
         <sensor type="gpu_ray" name="${name}">          
           <update_rate>${update_rate}</update_rate>
           <pose>0 0 0 0 0 0</pose>
@@ -113,7 +150,7 @@
             <min_intensity>100.0</min_intensity>
           </plugin>
         </sensor>
-      </gazebo>
+      </gazebo> -->
     </xacro:macro>
 </robot>
   

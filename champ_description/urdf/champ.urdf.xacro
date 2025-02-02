@@ -73,7 +73,7 @@
     <joint name="fixed" type="fixed">
         <parent link="world"/>
         <child link="base_link"/>
-      </joint> -->
+    </joint> -->
     <gazebo reference="base_link">
         <material>Gazebo/FlatBlack</material>
     </gazebo>
